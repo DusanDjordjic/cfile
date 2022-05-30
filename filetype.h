@@ -2,8 +2,6 @@
 #define _FILETYPE_H_
 #include <string>
 
-void create_cpp(const std::string& file_name, const std::string& path);
-void create_c(const std::string& file_name, const std::string&  path);
-void create_node(const std::string& file_name,const std::string& path);
+int create_file(const std::string& full_path, const std::string& config_file_name, const std::string end_key, int starting_pos);
 
 #endif

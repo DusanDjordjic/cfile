@@ -1,60 +1,44 @@
 #include <iostream>
 #include <fstream>
+#include <string>
+#include <cstddef>
 #include "filetype.h"
 
-void create_cpp(const std::string& file_name, const std::string& path)
+int create_file(const std::string& full_path, const std::string& config_file_name, const std::string end_key, int starting_pos)
 {
-    std::cout << "Create cpp file by name of \"" << file_name << "\" at " << path << std::endl;
-    std::string full_path;
-    if(*(path.end() - 1) != '/')
-        full_path = path + "/" + file_name + ".cpp";
-    else
-        full_path = path + file_name + ".cpp";
-
-    std::ofstream file(full_path);
-    if(!file.is_open())
+    std::string line;
+    std::ifstream config_file(config_file_name);
+    if(!config_file.is_open())
     {
-        std::cout << "Could not create file, maybe run with sudo" << std::endl;
-        return;
+        std::cerr << "Error while reading file " << config_file_name << std::endl;
+        return 1;
     }
-    file << "#include <iostream>\n\nint main(int argc, char* argv[]\n{\n\n\treturn 0;\n}" << std::endl;
-    file.close();
-}
 
-void create_c(const std::string& file_name, const std::string& path)
-{
-    std::cout << "Create c file by name of \"" << file_name << "\" at " << path << std::endl;
-    std::string full_path;
-    if(*(path.end() - 1) != '/')
-        full_path = path + "/" + file_name + ".c";
-    else
-        full_path = path + file_name + ".c";
-
-    std::ofstream file(full_path);
-    if(!file.is_open())
+    config_file.seekg(starting_pos);
+    std::ofstream output_file(full_path);
+    if(!output_file.is_open())
     {
-        std::cout << "Could not create file, maybe run with sudo" << std::endl;
-        return;
+        std::cerr << "Error while writing file " << full_path << std::endl;
+        return 2;
     }
-    file << "#include <stdio.h>\n\nint main(int argc, char* argv[]\n{\n\n\treturn 0;\n}" << std::endl;
-    file.close();
-}
 
-void create_node(const std::string& file_name, const std::string& path)
-{
-    std::cout << "Create node file by name of " << file_name << " at " << path << std::endl;
-    std::string full_path;
-    if(*(path.end() - 1) != '/')
-        full_path = path + "/" + file_name + ".js";
-    else
-        full_path = path + file_name + ".js";
-
-    std::ofstream file(full_path);
-    if(!file.is_open())
+    while(std::getline(config_file, line))
     {
-        std::cout << "Could not create file, maybe run with sudo" << std::endl;
-        return;
+        std::size_t end_index = line.rfind(end_key, 0); 
+        if(end_index != std::string::npos)
+        {
+            std::cout << "Created file at " << full_path << std::endl;
+            config_file.close();
+            output_file.close();
+            return 0;
+        }
+        output_file << line << '\n';
     }
-    file << "const http = require('http');\n\nconst hostname = '127.0.0.1';\nconst port = 3000;\n\nconst server = http.createServer((req, res) => {\n\tres.statusCode = 200;\n\tres.setHeader('Content-Type', 'text/plain');\n\tres.end('Hello World');\n});\n\nserver.listen(port, hostname, () => {\n\tconsole.log(`Server running at http://${hostname}:${port}/`);\n});" << std::endl;
-    file.close();
+   
+    std::cout << "ERROR: Did not find " << end_key << std::endl;
+    std::cout << "Created file at " << full_path << std::endl;
+    config_file.close();
+    output_file.close();
+
+    return 0;
 }
