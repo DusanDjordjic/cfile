@@ -12,7 +12,11 @@ void create_cpp(const std::string& file_name, const std::string& path)
         full_path = path + file_name + ".cpp";
 
     std::ofstream file(full_path);
-
+    if(!file.is_open())
+    {
+        std::cout << "Could not create file, maybe run with sudo" << std::endl;
+        return;
+    }
     file << "#include <iostream>\n\nint main(int argc, char* argv[]\n{\n\n\treturn 0;\n}" << std::endl;
     file.close();
 }
@@ -27,7 +31,11 @@ void create_c(const std::string& file_name, const std::string& path)
         full_path = path + file_name + ".c";
 
     std::ofstream file(full_path);
-
+    if(!file.is_open())
+    {
+        std::cout << "Could not create file, maybe run with sudo" << std::endl;
+        return;
+    }
     file << "#include <stdio.h>\n\nint main(int argc, char* argv[]\n{\n\n\treturn 0;\n}" << std::endl;
     file.close();
 }
@@ -42,7 +50,11 @@ void create_node(const std::string& file_name, const std::string& path)
         full_path = path + file_name + ".js";
 
     std::ofstream file(full_path);
-
+    if(!file.is_open())
+    {
+        std::cout << "Could not create file, maybe run with sudo" << std::endl;
+        return;
+    }
     file << "const http = require('http');\n\nconst hostname = '127.0.0.1';\nconst port = 3000;\n\nconst server = http.createServer((req, res) => {\n\tres.statusCode = 200;\n\tres.setHeader('Content-Type', 'text/plain');\n\tres.end('Hello World');\n});\n\nserver.listen(port, hostname, () => {\n\tconsole.log(`Server running at http://${hostname}:${port}/`);\n});" << std::endl;
     file.close();
 }
