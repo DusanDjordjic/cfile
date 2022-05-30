@@ -18,7 +18,8 @@ Program for creating default files
 cpp, c, node
 
 ### Customization
-To make cfile work you need to edit main.cpp as said in Installation step, but feel free to change name of the .cfile.conf to whatever you want.
-Also change path to whatever you want.
-In main you will find two strings `start_key` and `end_key` these define blocks of text that will be writen to a 'default' file.
-It works like this `start_key filetype extension_that_will_be_added (text_that_will_be_copied) end_key`. You can make your own default configurations and feel free to submit them to this repo :D.
+To make `cfile` work you need to edit `main.cpp` as said in the Installation step, but feel free to change the name of the `.cfile.conf` to whatever you want.
+
+Also, change the path to whatever you want. In the main.cpp you will find two strings `start_key` and `end_key` these define blocks of text that will be written to a 'default' file.
+
+It works like this `start_key filetype extension_that_will_be_added (text_that_will_be_copied) end_key`. You can make your default configurations and feel free to submit them to this repo :D.
