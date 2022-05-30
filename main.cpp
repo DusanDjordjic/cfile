@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <string.h>
 #include "filetype.h"
 
@@ -19,7 +20,15 @@ int main(int argc, char** argv)
     else 
         file_dest = argv[3];
 
+    std::ifstream config_file("/home/dusandux/.cfile.conf");
 
+    if(!config_file.is_open())
+    {
+        std::cerr << "Could not open config file in /home/dusandux/.cfile.conf" << std::endl;
+        return 1;
+    }
+    config_file.close();
+    return 0;
     if(file_type.compare("cpp") == 0)
     {
         create_cpp(file_name, file_dest);
