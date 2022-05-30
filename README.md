@@ -4,8 +4,10 @@ Program for creating default files
 ## Instalation
 1. Clone the repo `git clone https://github.com/DusanDjordjic/cfile.git`
 2. `cd cfile`
-3. Build it. I use g++ but you can use whatever you want `g++ main.cpp filetype.cpp -o cfile`
-4. Copy `cfile` to `/usr/bin/` -> `sudo cp cfile /usr/bin/cfile`.
+3. Copy `.cfile.conf` to your home directory
+4. Edit main.cpp and change `config_file_name` so it points to the your `.cfile.conf`
+5. Build it. I use g++ but you can use whatever you want `g++ main.cpp filetype.cpp -o cfile`
+6. Copy `cfile` to `/usr/bin/` -> `sudo cp cfile /usr/bin/cfile`.
 > **_NOTE:_** Feel free to rename it to whetever you like e.g. `sudo cp cfile /usr/bin/genfile` and then run `genfile cpp main`.
 
 ## Usage
@@ -15,6 +17,9 @@ Program for creating default files
 ## Supported file types
 cpp, c, node
 
-### Features to add
-1. Configuration so the user can override default file contents and make his own.
-2. Make it so that in configuration user can define his type, an extension that will be appended, and file contents that will be included in the generated file.
+### Customization
+To make `cfile` work you need to edit `main.cpp` as said in the Installation step, but feel free to change the name of the `.cfile.conf` to whatever you want.
+
+Also, change the path to whatever you want. In the main.cpp you will find two strings `start_key` and `end_key` these define blocks of text that will be written to a 'default' file.
+
+It works like this `start_key filetype extension_that_will_be_added (text_that_will_be_copied) end_key`. You can make your default configurations and feel free to submit them to this repo :D.
