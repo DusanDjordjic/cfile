@@ -13,7 +13,7 @@ Program for creating default files
 > **_NOTE:_** It automatically adds extension. `cfile cpp main` will create main.cpp in current working directory.
 
 ## Supported file types
-cpp
+cpp, c, node
 
 ### Features to add
 1. Configuration so the user can override default file contents and make his own.
